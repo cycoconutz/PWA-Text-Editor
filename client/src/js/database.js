@@ -31,8 +31,7 @@ export const getDb = async () => {
   const store = tx.objectStore('jate');
   const request = store.getAll();
   const result = await request;
-  const update = store.put({ id: 1, value: content });
-  console.log('result.value', result, update);
+  console.log('result.value', result);
   return result;
 }
 
