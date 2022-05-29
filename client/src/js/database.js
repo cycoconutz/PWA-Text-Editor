@@ -14,12 +14,10 @@ const initdb = async () =>
   
 // Put Route
 export const putDb = async (content) =>{
+  console.log('PUT to the database');
   const jateDb = await openDB('jate', 1);
   const tx = jateDb.transaction('jate', 'readwrite');
   const store = tx.objectStore('jate');
-  if (!store.get(1)) {
-    store.add({id: 1, value: ''})
-  }
   const request = store.put({ id: 1, value: content });
   const result = await request;
   console.log('🚀 - data saved to the database', result);
@@ -27,12 +25,14 @@ export const putDb = async (content) =>{
 
 // Get Route
 export const getDb = async () => {
+  console.log('GET from the database');
   const jateDb = await openDB('jate', 1);
   const tx = jateDb.transaction('jate', 'readonly');
   const store = tx.objectStore('jate');
-  const request = store.get(id);
+  const request = store.getAll();
   const result = await request;
-  console.log('result.value', result);
+  const update = store.put({ id: 1, value: content });
+  console.log('result.value', result, update);
   return result;
 }
 
